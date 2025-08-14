@@ -1,0 +1,3 @@
+Hello! This is a zero-shot batch test.
+XTTS-v2 can clone a voice from a short reference clip.
+This is the third sentence for the batch.

@@ -1,0 +1,33 @@
+trainer:
+  # run a short adaptation; bump max_steps if you have more data
+  max_steps: 2500        # slightly fewer steps due to larger batch size
+  grad_accum: 1          # H100 can handle larger batches, reduce grad_accum
+  precision: "fp16"      # or "bf16" for H100 (better numerical stability)
+  log_interval: 50
+  eval_interval: 400     # more frequent evals due to faster training
+  save_interval: 400
+  num_loader_workers: 8  # H100 can handle more workers
+
+model: "xtts_v2"
+
+# Load pretrained XTTS-v2 weights from HF on start
+# (the library will resolve "coqui/XTTS-v2")
+init_from_hf: "coqui/XTTS-v2"
+
+optimizer:
+  name: "adamw"
+  lr: 2.0e-4
+  weight_decay: 1.0e-3
+  betas: [0.9, 0.98]
+
+scheduler:
+  name: "cosine"
+  warmup_steps: 200
+
+# Training details - optimized for H100 80GB
+batch_size: 16         # H100 can handle larger batches efficiently
+max_text_len: 400
+max_audio_len: 200000  # cap seconds -> frames; ok to keep generous
+
+# Language conditioning (English)
+language: "en"

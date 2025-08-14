@@ -1,0 +1,22 @@
+# Minimal dataset config for Coqui TTS Trainer
+# Point to your metadata + audio dir
+datasets:
+  - name: my_speaker
+    meta_file_train: "data/my_speaker/mdata.csv"
+    path: "data/my_speaker/wavs"
+    # Optional dev split: comment out if you don't have a separate file
+    # meta_file_val: "data/my_speaker/val_mdata.csv"
+
+# Audio / text settings (keep consistent with model defaults)
+audio:
+  sample_rate: 22050
+  num_mels: 80
+  win_length: 1024
+  hop_length: 256
+  fmin: 0
+  fmax: 8000
+
+# Text frontend (English)
+text:
+  phoneme_language: "en-us"
+  # leave defaults if unsure; XTTS handles multi-lingual
