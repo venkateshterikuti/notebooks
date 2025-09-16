@@ -106,7 +106,6 @@ for line in cfg_txt:
     line = line.strip()
     if "#" in line:
         line = line.split("#", 1)[0].strip()
-
     if not line:
         continue
     k, v = [x.strip() for x in line.split(":", 1)]

@@ -21,7 +21,20 @@ log_file="${artifact_dir}/train.log"
 
 mkdir -p "${artifact_dir}"
 
-python experiments/run_tinyshakespeare.py \
+timestamp=$(date +%Y%m%d-%H%M%S)
+run_name="tinyshakespeare-${timestamp}"
+checkpoint_path="checkpoints/${run_name}.pkl"
+artifact_dir="artifacts/${run_name}"
+metrics_csv="${artifact_dir}/training_metrics.csv"
+metrics_json="${artifact_dir}/training_metrics.json"
+loss_plot="${artifact_dir}/training_loss.png"
+log_file="${artifact_dir}/train.log"
+
+mkdir -p "${artifact_dir}"
+
+echo "[train] Launching experiments/run_tinyshakespeare.py (writing log to ${log_file})"
+
+PYTHONUNBUFFERED=1 python -u experiments/run_tinyshakespeare.py \
   --config experiments/tinyshakespeare.yaml \
   --device cuda \
   --out "${checkpoint_path}" \
