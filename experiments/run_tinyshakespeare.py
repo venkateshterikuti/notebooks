@@ -104,7 +104,9 @@ cfg_txt = Path(args.config).read_text().strip().splitlines()
 raw: Dict[str, str] = {}
 for line in cfg_txt:
     line = line.strip()
-    line = line.split("#", 1)[0].strip()
+    if "#" in line:
+        line = line.split("#", 1)[0].strip()
+
     if not line:
         continue
     k, v = [x.strip() for x in line.split(":", 1)]
