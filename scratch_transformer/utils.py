@@ -9,6 +9,7 @@ np.set_printoptions(precision=4, suppress=True)
 class Timer:
     def __init__(self) -> None:
         self.t0 = time.time()
+        self._start = self.t0
 
     def lap(self, msg: str = "") -> float:
         t = time.time() - self.t0
@@ -16,6 +17,10 @@ class Timer:
         if msg:
             print(f"[timer] {msg}: {t:.3f}s")
         return t
+
+    def elapsed(self) -> float:
+        """Return the total number of seconds since the timer started."""
+        return time.time() - self._start
 
 
 def count_params(param_dict: Dict[str, np.ndarray]) -> int:
