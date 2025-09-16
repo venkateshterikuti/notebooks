@@ -1,0 +1,2 @@
+numpy>=1.24
+cupy-cuda12x>=12.0; platform_system != "Windows"
