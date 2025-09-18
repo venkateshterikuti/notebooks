@@ -1,9 +1,0 @@
-# Default experiment config for CPU training on TinyShakespeare
-size: mini2p5m   # or: small5m
-steps: 6000
-batch_size: 32
-seq_len: 256
-lr: 3.0e-4
-weight_decay: 0.01
-grad_clip: 1.0
-print_every: 100
