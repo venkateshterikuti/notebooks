@@ -1,7 +1,7 @@
 # Java 17 to Java 21 Migration Baseline
 
-**Baseline version:** 0.1.0  
-**Last reviewed:** 2026-07-15  
+**Baseline version:** 0.1.1  
+**Last reviewed:** 2026-07-16  
 **Status:** Initial baseline pending organizational Java SME approval
 
 ## Purpose
@@ -28,7 +28,7 @@ Support Java source repositories that declare or credibly target Java 17 and use
 - Gradle, including Gradle Wrapper, Groovy DSL, Kotlin DSL, and multi-project builds
 - Common CI, container, buildpack, and Java-version configuration
 
-Detect but do not fully modernize frameworks such as Spring Boot. Treat Android, Scala-only, Kotlin-only, Ant-only, Bazel-only, and other build systems as `UNSUPPORTED` in version 0.1.0. For mixed-language projects, assess Java/build configuration and mark non-Java compilation compatibility `UNRESOLVED`.
+Detect but do not fully modernize frameworks such as Spring Boot. Treat Android, Scala-only, Kotlin-only, Ant-only, Bazel-only, and other build systems as `UNSUPPORTED` in version 0.1.1. For mixed-language projects, assess Java/build configuration and mark non-Java compilation compatibility `UNRESOLVED`.
 
 ## Evidence and classification policy
 
@@ -104,6 +104,8 @@ Inspect for evidence of:
 
 Static source matches are indicators, not proof. Confirm with compilation, tests, `jdeps`, `jdeprscan`, runtime logs, or authoritative library documentation when available.
 
+An `--add-opens` flag indicates reflective access to a strongly encapsulated package. It does not, by itself, prove use of an internal JDK API. Report the package opened, identify the library or code path that requires it when possible, and require Java 21 test evidence before recommending removal.
+
 ## Java 17 to 21 changes emphasized by this baseline
 
 - JDK 18 and later use UTF-8 as the default charset. Applications that implicitly depended on an environment-specific JDK 17 charset require behavioral testing and may require explicit charsets.
@@ -133,14 +135,16 @@ Record command, working directory, exit status, relevant output summary, and whe
 - **CHANGES REQUIRED:** One or more concrete required changes remain.
 - **BLOCKED:** A prerequisite prevents meaningful assessment or validation, such as missing repository files, unavailable JDK 21, or inaccessible inherited configuration.
 - **PARTIALLY VALIDATED:** Static assessment completed, but one or more required runtime checks were skipped, unavailable, inconclusive, or environmental.
-- **UNSUPPORTED:** The repository is outside version 0.1.0 scope.
+- **UNSUPPORTED:** The repository is outside version 0.1.1 scope.
+
+An unavailable JDK 21 or build tool is a validation prerequisite blocker, not a required repository change. Record the affected validation checks as `BLOCKED`. The overall report may still be `CHANGES REQUIRED` when separate repository evidence proves changes are required.
 
 ## Authoritative sources
 
 Review dates refer to this baseline, not to publication dates.
 
-- Oracle JDK 21 Migration Guide â Preparing for Migration: https://docs.oracle.com/en/java/javase/21/migrate/preparing-migration.html
-- Oracle JDK 21 Migration Guide â Significant Changes: https://docs.oracle.com/en/java/javase/21/migrate/significant-changes-jdk-release.html
+- Oracle JDK 21 Migration Guide — Preparing for Migration: https://docs.oracle.com/en/java/javase/21/migrate/preparing-migration.html
+- Oracle JDK 21 Migration Guide — Significant Changes: https://docs.oracle.com/en/java/javase/21/migrate/significant-changes-jdk-release.html
 - Oracle `jdeps` documentation: https://docs.oracle.com/en/java/javase/21/docs/specs/man/jdeps.html
 - Oracle `jdeprscan` documentation: https://docs.oracle.com/en/java/javase/21/docs/specs/man/jdeprscan.html
 - Gradle Java compatibility matrix: https://docs.gradle.org/current/userguide/compatibility.html
