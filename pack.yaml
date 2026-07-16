@@ -1,0 +1,11 @@
+namespace: fm
+name: java-modernization
+version: "0.1.0"
+description: "Guided, read-only assessment and validation workflows for Java application modernization."
+artifacts:
+  - type: instruction
+    name: java-17-to-21-baseline
+    file: instructions/java-17-to-21-baseline.md
+  - type: skill
+    name: java_17_to_21
+    file: skills/java_17_to_21.md
