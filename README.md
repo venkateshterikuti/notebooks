@@ -1,8 +1,8 @@
 # fm-pack-java-modernization
 
-An Anteroom pack for repeatable, evidence-based Java modernization assessments.
+An AR pack for repeatable, evidence-based Java modernization assessments.
 
-Version `0.1.0` provides `/java-17-to-21`, a guidance-only workflow that inspects a local Java repository, identifies migration work, and validates proposed changes when the user explicitly approves command execution.
+Version `0.1.1` provides `/java-17-to-21`, a guidance-only workflow that inspects a local Java repository, identifies migration work, and validates proposed changes when the user explicitly approves command execution.
 
 ## Scope
 
@@ -26,7 +26,7 @@ Not supported in this version:
 
 ## Usage
 
-Start Anteroom from the root of the target repository:
+Start AR from the root of the target repository:
 
 ```powershell
 cd C:\path\to\java-repository
@@ -70,8 +70,19 @@ Manual installation, when authorized in the work environment:
 
 ```powershell
 aroom pack install <path-to-fm-pack-java-modernization>
-aroom pack attach fm/java-modernization
+aroom pack attach fm/java-modernization --project
 aroom pack list
+```
+
+Run the project-scoped attach command from the root of the Java repository. A global attachment makes the pack instructions and skill active outside the repository being assessed and is not recommended for this pack.
+
+If an earlier version was attached globally, detach it before attaching the updated pack to the project:
+
+```powershell
+aroom pack detach fm/java-modernization
+aroom pack install <path-to-fm-pack-java-modernization>
+cd <path-to-java-repository>
+aroom pack attach fm/java-modernization --project
 ```
 
 Do not run repository onboarding scripts outside the approved work environment.
